@@ -1,0 +1,21 @@
+body{
+    background-color: #02343F;
+}
+
+table {
+    background-color: #F0EDCC;
+    border-collapse: collapse;
+    width: 95%;
+}
+
+td, th {
+    text-align: center;
+    font: bold 16px Arial, sans-serif;
+    border: 4px solid black;
+}
+
+h1 {
+    font: bold 30px;
+    color: #F0EDCC;
+    text-align: center;
+}
