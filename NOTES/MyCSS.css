@@ -1,0 +1,15 @@
+body {
+    background-color: rgb(228, 188, 188);
+}
+
+h3 {
+    color: black;
+    background-color: aquamarine;
+    border: 3px solid black ;
+}
+
+a {
+    background-color: aquamarine;
+    border: 3px solid black;
+    font-size: 20px;
+}
