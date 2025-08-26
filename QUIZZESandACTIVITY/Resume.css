@@ -3,7 +3,7 @@ body {
 }
 
 .green {
-    margin-left:;
+    margin-left: 1000px;
     font: 18px Arial, sans-serif;
     color: rgb(0, 153, 0);
 }
@@ -56,4 +56,8 @@ body {
 .white2 {
     font: 20px Arial, sans-serif;
     color: #8be4ff;
+}
+
+.first, .second, .third  {
+    margin-left: 1000px;
 }
