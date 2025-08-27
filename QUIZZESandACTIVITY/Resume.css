@@ -3,7 +3,7 @@ body {
 }
 
 .green {
-    margin-left: 1000px;
+    margin-left: 500px;
     font: 18px Arial, sans-serif;
     color: rgb(0, 153, 0);
 }
@@ -58,6 +58,25 @@ body {
     color: #8be4ff;
 }
 
-.first, .second, .third  {
-    margin-left: 1000px;
+.first  {
+    margin-left: 500px;
+}
+
+.second {
+    margin-bottom: px;
+}
+
+.pfp {
+    
+}
+
+.lightgreen2 {
+    font: 20px Arial, sans-serif;
+    color: rgb(153, 255, 153);
+}
+
+.white4 {
+    font: 20px Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
