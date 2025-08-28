@@ -1,0 +1,66 @@
+body {
+    background-color: rgb(46, 46, 46);
+    color: white;
+    font-size: 25px;
+
+}
+
+#line {
+    border-right: 1px groove grey;
+}
+
+#attr { 
+    color: #77ff55;
+}
+
+#c { 
+    color: #ff0095;
+}
+
+#tag { 
+    color: #ff0095;
+}
+
+#string { 
+    color: #80e6ff;
+}
+
+#g { 
+    color: rgb(255, 255, 255);
+}
+
+h1, p, u, pre, div, span, br {
+    text-align: center;
+}
+
+.AL {
+    display: block;
+    margin-top:50px;
+    margin-right: 1009px;
+    border: 1px solid white;
+    
+}
+
+.AR { 
+    display: block;
+    margin-top: -309.6px;
+    margin-left: 900px;
+    border: 1px solid white;
+    padding: 32.6px;
+}
+
+.BL { 
+    display: block;
+    margin-top: 50px;
+    margin-right: 1009px;
+    border: 1px solid white;
+    padding: 20px;
+}
+
+.BR { 
+    display: block;
+    margin-top: -292px;
+    margin-left: 900px;
+    border: 1px solid white;
+    padding: 65.8px;
+}
