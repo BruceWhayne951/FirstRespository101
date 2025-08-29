@@ -2,6 +2,10 @@ body {
     background-color: black;
 }
 
+.line { 
+    border-left: 1px groove grey;
+}
+
 .green {
     font: 18px Arial, sans-serif;
     color: rgb(0, 153, 0);
