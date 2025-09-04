@@ -33,9 +33,13 @@ hr {
 
 .link-grid {
   border: 3px solid #0a4948;
-  padding: 20px;
-  margin: 20px auto;
-  width: fit-content;        
+  background-color: #f9f9f9; 
+  border-radius: 10px; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;      
+}
+
+.link-grid2 {
+  border: 3px solid #0a4948;   
   background-color: #f9f9f9; 
   border-radius: 10px; 
   transition: transform 0.3s ease, box-shadow 0.3s ease;      
