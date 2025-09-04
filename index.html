@@ -1,31 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="2;url=index2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading Portfolio...</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0F706F;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      flex-direction: column;
+    }
+
+    .spinner {
+      border: 6px solid rgba(255, 255, 255, 0.2);
+      border-top: 6px solid #fff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+  </style>
 </head>
 <body>
-    <h1>WHAYNE ZACKARRY C. SANTOS</h1>
-    <h2>11 - Competence</h2>
-    <hr>
-    <h2>Net Prog Portfolio for SEM 1</h2>
-<div class="LINKS">
-<pre>
-    <a href="ImageAndLinks/MAIN.html">ImageLinking</a><br>
-    <a href="ImageMapping/IMAGEMAP.html">ImageMapping</a>
-
-    <a href="NOTES/color.html">Learning how to Add Color</a><br>
-    <a href="NOTES/CSS1.html">Connecting CSS</a><br>
-    <a href="NOTES/fontstyle.html">Different Font Style</a><br>
-    <a href="quizOne/Activitynambaone.html">Activity No.1</a><br>
-    <a href="QUIZZESandACTIVITY/QUIZONE.html">Quiz NO.1</a><br> 
-    <a href="QUIZZESandACTIVITY/table.html">Table Activity</a><br>
-    <a href="QUIZZESandACTIVITY/Resume.html">Resume</a><br>
-    <a href="IMAGESALE/NIKE.html">NIKE/IMAGESALE</a><br>
-    <a href="Backline&Inline/BloklineInline.html">Block&Inline</a>
-</pre>
-</div>
+  <div class="spinner"></div>
+  <h1>Loading Portfolio</h1>
+  <p>Redirecting in a moment...</p>
 </body>
 </html>

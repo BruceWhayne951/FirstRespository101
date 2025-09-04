@@ -6,7 +6,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      background: linear-gradient(to right, #ffbfd2, #ff6a6a);
       padding: 40px;
       color: #333;
     }
@@ -16,7 +16,7 @@
       
       margin: auto;
       padding: 30px;
-      background-color: #ffffff;
+      background-color:  #FF4949;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       display: flex;
@@ -36,13 +36,13 @@
 
     .list-section:hover {
       transform: translateY(-5px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.20);
+      box-shadow: 0 17px 30px rgba(0,0,0,0.30);
     }
 
     h2 {
       font-size: 1.4em;
       margin-bottom: 15px;
-      color: #0077b6;
+      color: #DD1717;
     }
 
     ul, ol, dl {
@@ -56,7 +56,7 @@
     dt {
       font-weight: 600;
       margin-top: 12px;
-      color: #023e8a;
+      color: #8a0202;
     }
 
     dd {
