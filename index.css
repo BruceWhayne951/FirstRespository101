@@ -1,5 +1,5 @@
 body {
-    background-color: #0F706F;
+    background-color: #083d3c;
 }
 
 h1, h2 {
@@ -16,7 +16,7 @@ a {
 }
 
 a:hover {
-    background-color: #083d3c;
+    background-color: #083d2d;
     color: rgb(255, 255, 255);
     font-size: 31px;
 }
@@ -34,7 +34,7 @@ hr {
 .link-grid {
   width: 25%;
   border: 3px solid #0a4948;
-  background-color: #f9f9f9;
+  background-color: #8cfff9;
   border-radius: 10px;
   transition: transform 0.3s, box-shadow 0.3s ease;
 }
@@ -51,4 +51,12 @@ hr {
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 30px;
+}
+
+img {
+    border: rgb(0, 0, 0) solid 5px;
+    display: block;
+    width: 200px;
+    height: 200px;
+    border-radius: 10%;
 }
