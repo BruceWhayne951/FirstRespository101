@@ -1,5 +1,5 @@
 body {
-    background-color: #083d3c;
+    background-color: #007775;
 }
 
 h1, h2 {
@@ -32,9 +32,9 @@ hr {
 }
 
 .link-grid {
-  width: 25%;
+  width: 20%;
   border: 3px solid #0a4948;
-  background-color: #8cfff9;
+  background-color: #87ffeb;
   border-radius: 10px;
   transition: transform 0.3s, box-shadow 0.3s ease;
 }
