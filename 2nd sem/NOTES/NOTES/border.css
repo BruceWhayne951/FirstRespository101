@@ -1,0 +1,56 @@
+
+
+.inside {
+    border: 2px solid rgb(116, 0, 0);
+    padding: 20px;
+    margin: 20px;
+}
+
+.box1 {
+    border: 2px dotted black;
+    margin-bottom: 50px;
+}
+
+.box2 {
+    border: 2px dashed black;
+    margin-bottom: 50px;
+
+}
+
+.box3 {
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    margin-bottom: 50px;
+
+}
+
+.box4 {
+    border: 2px double rgb(0, 0, 0);
+    margin-bottom: 50px;
+
+}
+
+.box5 {
+    border: 2px groove rgb(0, 0, 0);
+    margin-bottom: 50px;
+
+}
+
+.box6 {
+    border: 2px ridge rgb(0, 0, 0);
+    margin-bottom: 50px;
+
+}
+
+.box7 {
+    border: 1px inset rgb(0, 0, 0);
+    margin-bottom: 50px;
+
+}
+
+.box8 {
+    border: 1px outset rgb(0, 0, 0);
+    margin-bottom: 50px;
+
+}
+

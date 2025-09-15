@@ -1,0 +1,128 @@
+.outside {
+    border: 5px solid black;
+    height: 350px;
+    border-radius: 12px 15px 5px 20px;
+    background-color: rgb(255, 0, 51);
+}
+
+body {
+    background-color: rgb(255, 176, 192);
+}
+
+
+.box1 {
+    justify
+    padding-left: 10px;
+    margin-bottom: 20px;
+    width: 250px;   
+    height: 100px;
+    float: left;
+    margin: 25px;
+    border: 5px solid black;
+    border-radius: 12px;
+}
+
+.box2 {
+    padding-top: 25px;
+    margin-bottom: 20px;
+        width: 200px;
+    float: left;
+        margin: 25px;
+    border: 5px solid black;
+    border-radius: 12px;
+}
+
+.box3 {
+    padding-right: 15px;
+    margin-bottom: 20px;
+        width: 200px;
+    height: 100px;
+
+    float: left;
+        margin: 15px;
+    border: 5px solid black;
+    border-radius: 12px;
+}
+
+.box4 {
+    padding-bottom: 35px;
+    margin-bottom: 20px;
+        width: 200px;
+    float: left;
+        margin: 25px;
+    border: 5px solid black;
+    border-radius: 12px;
+}
+
+.outside2 {
+        background-color: rgb(255, 0, 51);
+    border: 5px solid black;
+    height: 350px;
+    border-radius: 12px 15px 5px 20px;
+    clear: both;
+    margin-top: 20px;
+}
+
+.box5 {
+    padding: 10px 10px 0px 0px;
+    margin-bottom: 20px;
+        width: 200px;
+    float: left;
+        margin: 25px;
+    border: 5px solid black;
+    border-radius: 12px;
+}
+
+.box6 {
+    padding: 0px 15px 15px 0px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 200px;
+    float: left;
+     margin: 25px;
+    border: 5px solid black;
+    border-radius: 12px;
+}
+
+.box7 {
+    padding: 0px 0px 25px 25px;
+    margin-bottom: 20px;
+        width: 200px;
+    float: left;
+        margin: 25px;
+    border: 5px solid black;
+    border-radius: 12px;
+}
+
+.box8 {
+    padding: 35px 0px 0px 35px;
+    margin-bottom: 20px;
+        width: 200px;
+    float: left;
+        margin: 25px;
+    border: 5px solid black;
+    border-radius: 12px;
+}
+
+.outside3 {
+        background-color: rgb(255, 0, 51);
+    border: 5px solid black;
+    height: 350px;
+    border-radius: 12px;
+    clear: both;
+    margin-top: 20px;
+}
+
+.box9 {
+    padding: 25px;
+    margin-bottom: 20px;
+    width: 250px;
+    float: left;
+    margin: 25px;
+    border: 5px solid black;
+    border-radius: 12px;
+}
+
+.color1 {
+    background-color: rgb(255, 255, 255);
+}
