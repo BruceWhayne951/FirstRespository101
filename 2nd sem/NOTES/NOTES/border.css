@@ -1,56 +1,91 @@
-
+body {
+    text-align: center;
+    background-color: rgb(255, 176, 192);
+}
 
 .inside {
-    border: 2px solid rgb(116, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 25px 25px 25px 25px;
     padding: 20px;
     margin: 20px;
 }
 
 .box1 {
-    border: 2px dotted black;
+    border: 5px dotted black;
     margin-bottom: 50px;
 }
 
 .box2 {
-    border: 2px dashed black;
+    border: 5px dashed black;
     margin-bottom: 50px;
 
 }
 
 .box3 {
-    border: 2px solid rgb(0, 0, 0);
+    border: 5px solid rgb(0, 0, 0);
     border-radius: 15px;
     margin-bottom: 50px;
 
 }
 
 .box4 {
-    border: 2px double rgb(0, 0, 0);
+    border: 5px double rgb(0, 0, 0);
     margin-bottom: 50px;
 
 }
 
 .box5 {
-    border: 2px groove rgb(0, 0, 0);
+    border: 5px groove rgb(0, 0, 0);
     margin-bottom: 50px;
 
 }
 
 .box6 {
-    border: 2px ridge rgb(0, 0, 0);
+    border: 5px ridge rgb(0, 0, 0);
     margin-bottom: 50px;
 
 }
 
 .box7 {
-    border: 1px inset rgb(0, 0, 0);
+    border: 10px inset rgb(0, 0, 0);
     margin-bottom: 50px;
 
 }
 
 .box8 {
-    border: 1px outset rgb(0, 0, 0);
+    border: 10px outset rgb(0, 0, 0);
     margin-bottom: 50px;
 
 }
 
+.box9 {
+    border: none;
+}
+
+.background {
+    background-color: rgb(255, 0, 51);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #333333;
+  display: flex;
+}
+
+ul li a {
+  display: block;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: ease-in-out 0.3s;
+}
+
+ul li a:hover:not(.active) {
+  background-color: #000000;
+}
+
+ul li a.active {
+  background-color: #005033;
+}
