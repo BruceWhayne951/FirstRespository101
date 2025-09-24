@@ -21,3 +21,40 @@ ul li a:hover:not(.active) {
 ul li a.active {
   background-color: #005033;
 }
+
+/* navigator bar on top */
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  gap: 0;
+  float: left;
+  border: 2px solid black;
+  width: max-content;
+  margin: 10px;
+  margin: 50px 50px;
+}
+
+.box {
+  background-color: lightblue;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.middle {
+  background: white;
+  border:  1px solid black;
+  text-align: left;
+  font-weight: bold;
+  margin-left: 10px;
+  background-color: lightblue;
+}
+
+.middle p {
+  margin-left: 5px;
+}
