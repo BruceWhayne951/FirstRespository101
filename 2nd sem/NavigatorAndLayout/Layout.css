@@ -1,5 +1,5 @@
 body {
-    background-color: #414141;
+    background-color: #534e4e;
 }
 
 header {
@@ -13,11 +13,11 @@ header {
 nav {
   float: left;
   width: 20%;
-  height: 340px;
+  height: 380px;
   background: grey;
   margin-top: 20PX;
   margin-right: 10px;
-  padding: 20px;
+
 }
 
 nav ul {
@@ -31,14 +31,15 @@ nav ul {
 nav li a {
     text-align: center;
     display: block;
-    padding: 0;
-    margin: 0;
-    background-color: rgb(146, 146, 146);
 }
 
 li :hover {
     background-color: #000000;
-    border: #9e0000 1px solid;
+
+}
+
+ul li a.active {
+  background-color: #474747;
 }
 
 a {
@@ -49,7 +50,7 @@ a {
 article {
   float: left;
   padding: 20px;
-  width: 75%;
+  width: 77.3%;
   background-color: #f1f1f1;
   height: 340px;
     margin-top: 20PX;
@@ -71,12 +72,12 @@ footer {
 
 @media (max-width: 600px) {
   nav {
-    width: 40%;
-    height: auto;
+    width: 48%;
+    height: 390px;
   }
 
   article {
-    width: 40%;
+    width: 41%;
     height: 349px;
   }
 }
