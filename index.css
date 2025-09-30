@@ -55,7 +55,6 @@ hr {
 
 img {
     border: rgb(0, 0, 0) solid 5px;
-    display: block;
     width: 200px;
     height: 200px;
     border-radius: 10%;

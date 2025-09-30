@@ -56,6 +56,14 @@ article {
     margin-top: 20PX;
 }
 
+article a {
+      font-size: 26px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    transition:  0.3s;
+}
+
 section::after {
   content: "";
   display: table;
