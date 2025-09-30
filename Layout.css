@@ -1,5 +1,5 @@
 body {
-    background-color: #534e4e;
+    background-color: #3a3941;
 }
 
 header {
@@ -7,14 +7,14 @@ header {
   padding: 30px;
   text-align: center;
   font-size: 45px;
-  color: red;
+  color: #71C0BB;
 }
 
 nav {
   float: left;
   width: 20%;
   height: 380px;
-  background: grey;
+  background: #71C0BB;
   margin-top: 20PX;
   margin-right: 10px;
 
@@ -34,16 +34,16 @@ nav li a {
 }
 
 li :hover {
-    background-color: #000000;
+    background-color: #5fa8a5;
 
 }
 
 ul li a.active {
-  background-color: #474747;
+  background-color: #4E6688;
 }
 
 a {
-    color: red;
+    color: black;
     text-decoration: none;
 }
 
@@ -51,7 +51,7 @@ article {
   float: left;
   padding: 20px;
   width: 77.3%;
-  background-color: #f1f1f1;
+  background-color: #71C0BB;
   height: 340px;
     margin-top: 20PX;
 }
@@ -64,6 +64,13 @@ article a {
     transition:  0.3s;
 }
 
+article p {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+}
+
 section::after {
   content: "";
   display: table;
@@ -72,16 +79,10 @@ section::after {
 
 p {
     font-size: 23px;
-    text-align: justify;
+    text-align: center;
     padding: 5px 5px 5px 5px;
 }
 
-footer {
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
 
 
 @media (max-width: 600px) {
@@ -99,8 +100,13 @@ footer {
 footer {
   background-color: #000000;
   padding: 10px;
-  text-align: center;
-  color: rgb(255, 0, 0);
+  color: #71C0BB;
   margin-top: 20px;
+  height: 100px;
   font-size: 25px;
+}
+
+footer p {
+  font-size: 15px;
+  text-align: left;
 }

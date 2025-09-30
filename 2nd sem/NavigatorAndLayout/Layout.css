@@ -95,4 +95,10 @@ footer {
   color: rgb(255, 0, 0);
   margin-top: 20px;
   font-size: 25px;
+  height: 100px;
+}
+
+footer p {
+  font-size: 15px;
+  text-align: left;
 }
