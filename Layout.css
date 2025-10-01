@@ -17,6 +17,7 @@ nav {
   background: #71C0BB;
   margin-top: 20PX;
   margin-right: 10px;
+  transition: 0.3s ease-in-out;
 
 }
 
@@ -54,6 +55,7 @@ article {
   background-color: #71C0BB;
   height: 340px;
     margin-top: 20PX;
+        transition: 0.3s ease-in-out;
 }
 
 article a {
@@ -61,7 +63,6 @@ article a {
     color: black;
     text-decoration: none;
     text-align: center;
-    transition:  0.3s;
 }
 
 article p {
@@ -75,6 +76,7 @@ section::after {
   content: "";
   display: table;
   clear: both;
+  
 }
 
 p {
@@ -109,4 +111,14 @@ footer {
 footer p {
   font-size: 15px;
   text-align: left;
+}
+
+article:hover {
+  transform: scale(1.01);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 2);
+}
+
+nav:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 2);
 }
