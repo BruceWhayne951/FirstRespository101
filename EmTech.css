@@ -1,0 +1,146 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding: 90px;
+}
+
+body {
+    background-color: #ccfff8;
+}
+
+header {
+    height: 200px;
+    background-image: linear-gradient(to right, rgb(0, 189, 179), rgb(0, 82, 68));
+    border-radius: 40px 40px 0px 0px;
+    padding: 30px;
+    text-align: center;
+    font-size: 40px;
+}
+
+header h1 {
+    color: rgb(255, 255, 255);
+    margin-top: 35px;
+}
+
+header h4 {
+    position: absolute;
+    top: 170px;
+    left: 26%;
+    color: rgb(255, 255, 255);
+    margin-top: -10px;
+    font-size: 35px;
+    font-style: italic;
+}
+
+header img {
+    position: absolute;
+    left: 150px;
+    top: 38px;
+    height: 190px;
+    width: 190px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar {
+      position: sticky;
+      top: 0;
+      height: 60px;
+      overflow: hidden;
+      background-color: #333;
+      overflow: hidden;
+      border-radius: 0px 0px 5px 5px;
+    }
+.navbar a {
+      float: left;
+      font-size: 23px;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+.navbar a:hover {
+      background-color: #575757;
+    }
+
+a {
+    margin-left: 290px;   
+}
+
+article {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+article h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 32px;
+    color: #008080;
+    margin-bottom: 30px;
+}
+
+.project {
+    background-image: linear-gradient(to right, rgb(0, 189, 179), rgb(0, 160, 152));
+    border-radius: 10px;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+}
+
+.project b {
+    display: block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.project p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    text-align: justify;
+    color: #f5f5f5;
+    margin: 0;
+}
+
+.Introduction {
+    background-image: linear-gradient(to right, rgb(0, 189, 179), rgb(0, 160, 152));
+    width: 1000px;
+    border-radius: 10px;
+    padding: 20px 30px;
+    margin: 0 auto 20px; /* Centered horizontally + bottom spacing */
+}
+
+.Introduction p {
+    display: block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+#footerrr {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #030303; /* change mo color ng footer*/
+  color: white; /*change mo color ng text*/
+  position: relative;
+}
+
+.footer-icons a {
+  margin: 0 10px;
+  color: white; /*change mo color ng icon*/
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-icons a:hover {
+  color: white; /* change mo color */
+}
+
+#arr {
+  margin-top: 10px;
+  font-size: 14px;
+}

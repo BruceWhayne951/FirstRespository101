@@ -1,60 +1,58 @@
-.container {
-    position: absolute;
-    top: 10%;
-    height: 40%;
-    transform: translate(-50%, 0);
-    left: 40%;
+body{
+    background-color:  #686868;
 }
 
-.box1 {
-    width: 200px;
-    height: 200px;
-    background-color: red;
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    z-index: 1;
-    text-align: center;
+.container {   
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 10px;
+  height: max-content;
+  width: max-content;
 }
 
-.box2 {
-    width: 200px;
-    height: 200px;
-    background-color: blue;
-    position: absolute;
-    top: 100px;
-    left: 100px;
-    z-index: 3;
-}
-
-.box3 {
-    width: 200px;
-    height: 200px;
-    background-color: green;
-    position: absolute;
-    top: 150px;
-    left: 150px;
-    z-index: 2;
-}
-
-.box {
-    width: 200px;
-    height: 200px;
-    color: white;
-    font-size: 20px;
+.content{
     display: flex;
-    align-items: center;
+    height: 200px;
+    width: 200px;
     justify-content: center;
+    align-items: center;
+    margin-left: 400px;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    position: absolute;
+    border-radius: 10px;
 }
 
-h1 {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+img {
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-.box:hover {
-    opacity: 0.7;
-    transform: scale(1.05);
-    transition: all 0.3s ease;
+.content:hover {
+    transform: scale(1.1);
+    transition: ease-in-out 0.3s;
+    cursor: pointer;
+    z-index: 40;
+}
+
+.content1 {
+  top: 100px;
+  left: 100px;
+  z-index: 1;
+}
+
+.content2 {
+  top: 150px;
+  left: 150px;
+  z-index: 20;
+}
+
+.content3 {
+  top: 200px;
+  left: 200px;
+  z-index: 3;
 }
