@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bushido Battle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Home Screen -->
+  <div id="homeScreen" class="home-screen">
+    <h1>武士の決闘</h1>
+    <p class="subtitle">Bushido Battle Begins</p>
+    <button id="startButton">Fight!</button>
+  </div>
+
+  <!-- Score Display -->
+  <div class="score-container">
+    <div class="score-box">
+      <div class="score-label">PLAYER</div>
+      <div id="playerScore">0</div>
+    </div>
+    <div class="score-box">
+      <div class="score-label">ENEMY</div>
+      <div id="enemyScore">0</div>
+    </div>
+  </div>
+
+  <!-- Game UI -->
+  <div class="game-container">
+    <div class="hud">
+      <div class="health-bar" id="playerHealthContainer">
+        <div id="playerHealth"></div>
+      </div>
+      <div id="timer">60</div>
+      <div class="health-bar" id="enemyHealthContainer">
+        <div id="enemyHealth"></div>
+      </div>
+    </div>
+    <div id="displayText" style="display: none;"></div>
+    <canvas></canvas>
+  </div>
+  
+  <div class="mobile-controls">
+  <div class="left-controls">
+    <button id="moveLeft">←</button>
+    <button id="jump">↑</button>
+    <button id="moveRight">→</button>
+  </div>
+  <div class="right-controls">
+    <button id="attack">⚔️</button>
+  </div>
+</div>
+
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/classes.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
