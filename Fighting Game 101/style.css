@@ -161,3 +161,39 @@ canvas {
     display: none; /* Hide on desktop */
   }
 }
+
+/* Round controls (centered over the canvas) */
+#roundControls {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+  pointer-events: none; /* allow children to opt-in when visible */
+}
+
+#restartButton {
+  pointer-events: auto;
+  display: inline-block;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  color: #fff;
+  background: linear-gradient(180deg, #ffcc00 0%, #ff9f00 100%);
+  padding: 12px 18px;
+  border: 6px solid #111;
+  box-shadow: 0 6px 0 0 #222, 0 12px 0 0 #000, inset -4px -4px 0 0 rgba(0,0,0,0.2);
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  image-rendering: pixelated;
+}
+
+#restartButton:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 0 #222;
+}
+
+/* 8-bit outline/glow */
+#restartButton {
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
+}
