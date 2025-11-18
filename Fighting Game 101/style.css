@@ -44,53 +44,62 @@ html, body {
   }
 }
 
-/* Score Display */
+/* Score Display (8-bit arcade style) */
 .score-container {
   display: flex;
-  justify-content: space-between;
-  width: 1024px;
-  padding: 20px;
-  margin: 0 auto;
-  background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1e 100%);
-  border: 4px solid #fff;
-  box-shadow: 0 0 0 4px #000, 0 8px 0 0 #444, 0 8px 0 4px #000;
+  justify-content: center; /* center the score boxes */
+  align-items: center;
+  width: auto;
+  max-width: 720px;
+  padding: 8px 16px;
+  margin: 0 auto 8px;
+  background: transparent; /* removed background color */
+  gap: 12px;
 }
 
 .score-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
+  min-width: 220px;
 }
 
 .score-label {
-  font-size: 12px;
-  color: #818cf8;
-  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  font-size: 10px;
+  color: #ffd66b;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
   letter-spacing: 2px;
 }
 
+/* Score pill */
 #playerScore, #enemyScore {
-  font-size: 32px;
-  color: #fff;
-  background: #000;
-  padding: 15px 30px;
-  border: 4px solid #818cf8;
-  box-shadow: inset -4px -4px 0 0 #1a1a2e, inset 4px 4px 0 0 #4a4a6e, 0 0 20px rgba(129, 140, 248, 0.5);
-  min-width: 120px;
+  font-size: 28px;
+  color: #000;
+  background: linear-gradient(180deg,#ffd66b 0%,#ffb94d 100%);
+  padding: 12px 24px;
+  border: 6px solid #111;
+  box-shadow: inset -6px -6px 0 0 rgba(0,0,0,0.15), 0 8px 0 0 #222;
+  min-width: 140px;
   text-align: center;
   position: relative;
-  animation: scoreGlow 2s ease-in-out infinite;
+  border-radius: 4px;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 2px;
 }
 
-@keyframes scoreGlow {
-  0%, 100% {
-    box-shadow: inset -4px -4px 0 0 #1a1a2e, inset 4px 4px 0 0 #4a4a6e, 0 0 20px rgba(129, 140, 248, 0.5);
-  }
-  50% {
-    box-shadow: inset -4px -4px 0 0 #1a1a2e, inset 4px 4px 0 0 #4a4a6e, 0 0 30px rgba(129, 140, 248, 0.8);
-  }
+/* Alternate enemy color */
+#enemyScore {
+  background: linear-gradient(180deg,#ff6b6b 0%,#ff4b4b 100%);
 }
+
+/* pixel glow effect */
+@keyframes scorePulse {
+  0%,100%{ box-shadow: inset -6px -6px 0 0 rgba(0,0,0,0.15), 0 8px 0 0 #222; }
+  50% { box-shadow: inset -6px -6px 0 0 rgba(0,0,0,0.15), 0 10px 0 0 #333, 0 0 20px rgba(255,255,255,0.06); }
+}
+
+#playerScore, #enemyScore { animation: scorePulse 2.4s infinite; }
 
 /* Game UI */
 .game-container {
@@ -117,16 +126,32 @@ canvas {
   position: relative;
   width: 100%;
   height: 30px;
-  background-color: red;
-  border: 4px solid white;
+  background-color: #0b0b0b;
+  border: 6px solid #fff;
+  box-shadow: 0 6px 0 0 #222, 0 12px 0 0 #000;
+  overflow: hidden;
 }
 
 #playerHealth, #enemyHealth {
   position: absolute;
+  left: 0;
   top: 0;
   bottom: 0;
-  background: #818cf8;
-  width: 100%;
+  height: 100%;
+  /* Create blocky 8-bit look using repeating stripes */
+  background-size: 12px 100%;
+  box-shadow: inset -4px -4px 0 0 rgba(0,0,0,0.35);
+  /* Prevent sub-pixel smoothing when scaled */
+  image-rendering: pixelated;
+}
+
+/* Player (blue) and Enemy (red) blocky fills */
+#playerHealth {
+  background-image: repeating-linear-gradient(90deg, #5b6ef0 0 12px, #8ca1ff 12px 24px);
+}
+
+#enemyHealth {
+  background-image: repeating-linear-gradient(90deg, #ff4b4b 0 12px, #ff8a8a 12px 24px);
 }
 
 .mobile-controls {
@@ -166,7 +191,8 @@ canvas {
 #roundControls {
   position: absolute;
   left: 50%;
-  top: 50%;
+  /* nudge down slightly to account for the HUD above the canvas */
+  top: calc(50% + 20px);
   transform: translate(-50%, -50%);
   z-index: 2000;
   pointer-events: none; /* allow children to opt-in when visible */
@@ -177,11 +203,10 @@ canvas {
   display: inline-block;
   font-family: 'Press Start 2P', cursive;
   font-size: 12px;
-  color: #fff;
+  color: #ffffff;
   background: linear-gradient(180deg, #ffcc00 0%, #ff9f00 100%);
   padding: 12px 18px;
   border: 6px solid #111;
-  box-shadow: 0 6px 0 0 #222, 0 12px 0 0 #000, inset -4px -4px 0 0 rgba(0,0,0,0.2);
   text-align: center;
   border-radius: 4px;
   cursor: pointer;

@@ -19,16 +19,7 @@
   </div>
 
   <!-- Score Display -->
-  <div class="score-container">
-    <div class="score-box">
-      <div class="score-label">PLAYER</div>
-      <div id="playerScore">0</div>
-    </div>
-    <div class="score-box">
-      <div class="score-label">ENEMY</div>
-      <div id="enemyScore">0</div>
-    </div>
-  </div>
+  <!-- Score Display (moved below HUD inside game container) -->
 
   <!-- Game UI -->
   <div class="game-container">
@@ -36,18 +27,30 @@
       <div class="health-bar" id="playerHealthContainer">
         <div id="playerHealth"></div>
       </div>
-      <div id="timer">60</div>
       <div class="health-bar" id="enemyHealthContainer">
         <div id="enemyHealth"></div>
       </div>
     </div>
+    <!-- Score Display moved here so it appears below the HUD -->
+    <div class="score-container">
+      <div class="score-box">
+        <div class="score-label">PLAYER</div>
+        <div id="playerScore">0</div>
+      </div>
+      <div class="score-box">
+        <div class="score-label">ENEMY</div>
+        <div id="enemyScore">0</div>
+      </div>
+    </div>
+
+    <canvas></canvas>
+  </div>
+  
     <div id="displayText" style="display: none;"></div>
     <div id="roundControls" style="display: none; margin-top: 8px; text-align:center;">
       <button id="restartButton" style="display:none;">Restart Match</button>
     </div>
-    <canvas></canvas>
-  </div>
-  
+
   <div class="mobile-controls">
   <div class="left-controls">
     <button id="moveLeft">←</button>

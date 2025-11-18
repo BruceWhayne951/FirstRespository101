@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
           return Object.values(f.sprites).every((s) => s.image && s.image.complete)
         })
         if (allLoaded) return resolve()
-        if (Date.now() - start > timeout) return resolve() // give up after timeout
+        if (Date.now() - start > timeout) return resolve()
         setTimeout(check, 100)
       }
       check()
@@ -23,9 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
   startButton.addEventListener('click', () => {
     console.log('Fight button clicked') // Debug
     homeScreen.classList.add('fade-out')
-    // Keep the 1s fade-out, but ensure sprites are loaded before showing the game and starting round
     setTimeout(async () => {
-      // Wait for player and enemy sprite images to finish loading (max 5s)
       await waitForSpritesLoaded([player, enemy], 5000)
       homeScreen.style.display = 'none'
       gameContainer.style.display = 'block'
@@ -88,7 +86,12 @@ const player = new Fighter({
     attack1: {
       imageSrc: './img/samuraiMack/Attack1.png',
       framesMax: 6,
-      framesHold: 5 // Snappy
+      framesHold: 12 // Slower so opponent can dodge
+    },
+    attack2: {
+      imageSrc: './img/samuraiMack/Attack2.png',
+      framesMax: 6,
+      framesHold: 12 // Slower so opponent can dodge
     },
     takeHit: {
       imageSrc: './img/samuraiMack/Take Hit - white silhouette.png',
@@ -98,7 +101,7 @@ const player = new Fighter({
     death: {
       imageSrc: './img/samuraiMack/Death.png',
       framesMax: 6,
-      framesHold: 8
+      framesHold: 12
     }
   },
   attackBox: {
@@ -140,7 +143,7 @@ const enemy = new Fighter({
     jump: {
       imageSrc: './img/kenji/Jump.png',
       framesMax: 2,
-      framesHold: 10
+      framesHold: 13
     },
     fall: {
       imageSrc: './img/kenji/Fall.png',
@@ -150,7 +153,12 @@ const enemy = new Fighter({
     attack1: {
       imageSrc: './img/kenji/Attack1.png',
       framesMax: 4,
-      framesHold: 7
+      framesHold: 10 // Slower so opponent can dodge
+    },
+    attack2: {
+      imageSrc: './img/kenji/Attack2.png',
+      framesMax: 4,
+      framesHold: 10 // Slower so opponent can dodge
     },
     takeHit: {
       imageSrc: './img/kenji/Take hit.png',
@@ -160,7 +168,7 @@ const enemy = new Fighter({
     death: {
       imageSrc: './img/kenji/Death.png',
       framesMax: 7,
-      framesHold: 8
+      framesHold: 12
     }
   },
   attackBox: {
@@ -229,12 +237,6 @@ function resetRound() {
   }
   gsap.to('#playerHealth', { width: '100%' })
   gsap.to('#enemyHealth', { width: '100%' })
-
-  // Use the window-scoped timer variables from utils.js
-  window.timer = 60
-  document.querySelector('#timer').innerHTML = window.timer
-  clearTimeout(window.timerId)
-  decreaseTimer() // start the timer (decreaseTimer sets window.timerId)
 }
 
 // Function to restart the match
@@ -253,14 +255,36 @@ function restartMatch() {
   resetRound()
 }
 
+// Position the round controls centered over the canvas (fixes top-gap issue)
+function positionRoundControls() {
+  const roundControls = document.getElementById('roundControls')
+  const container = document.querySelector('.game-container')
+  const canvasEl = document.querySelector('canvas')
+  if (!roundControls || !container || !canvasEl) return
+
+  const containerRect = container.getBoundingClientRect()
+  const canvasRect = canvasEl.getBoundingClientRect()
+
+  const left = canvasRect.left - containerRect.left + canvasRect.width / 2
+  const top = canvasRect.top - containerRect.top + canvasRect.height / 2
+
+  roundControls.style.left = `${left}px`
+  roundControls.style.top = `${top}px`
+  roundControls.style.transform = 'translate(-50%, -50%)'
+  roundControls.style.pointerEvents = 'auto'
+}
+
+// Reposition on resize so the button stays centered over the canvas
+window.addEventListener('resize', () => {
+  positionRoundControls()
+})
+
 
 // Modified determineWinner to handle rounds
-function determineWinner({ player, enemy, timerId }) {
+function determineWinner({ player, enemy }) {
   // If a round is already ended, do nothing (prevents double-scoring)
   if (roundEnded) return
   roundEnded = true // Set flag to prevent more damage
-  // clear the active timer (use window.timerId if provided)
-  clearTimeout(typeof timerId !== 'undefined' ? timerId : window.timerId)
   document.querySelector('#displayText').style.display = 'flex'
   // Helper to force a fighter to play an animation even if switchSprite early-returns
   function forcePlayAnimation(fighter, name) {
@@ -322,9 +346,6 @@ function determineWinner({ player, enemy, timerId }) {
   }
 }
 
-// Timer is started by resetRound() when a round begins
-
-
 function animate() {
   window.requestAnimationFrame(animate)
   c.fillStyle = 'black'
@@ -338,11 +359,12 @@ function animate() {
   enemy.velocity.x = 0
   // player movement (only when not dead)
   if (!player.dead) {
+    const pSpeed = player.isAttacking ? ATTACK_MOVE_SPEED : MOVE_SPEED
     if (keys.a.pressed && player.lastKey === 'a') {
-      player.velocity.x = -5
+      player.velocity.x = -pSpeed
       player.switchSprite('run')
     } else if (keys.d.pressed && player.lastKey === 'd') {
-      player.velocity.x = 5
+      player.velocity.x = pSpeed
       player.switchSprite('run')
     } else {
       player.switchSprite('idle')
@@ -358,11 +380,12 @@ function animate() {
 
   // Enemy movement (only when not dead)
   if (!enemy.dead) {
+    const eSpeed = enemy.isAttacking ? ATTACK_MOVE_SPEED : MOVE_SPEED
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
-      enemy.velocity.x = -5
+      enemy.velocity.x = -eSpeed
       enemy.switchSprite('run')
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
-      enemy.velocity.x = 5
+      enemy.velocity.x = eSpeed
       enemy.switchSprite('run')
     } else {
       enemy.switchSprite('idle')
@@ -383,7 +406,7 @@ function animate() {
       rectangle2: enemy
     }) &&
     player.isAttacking &&
-    player.framesCurrent === 4
+    (player.framesCurrent === 4 || player.framesCurrent === player.framesMax - 3)
   ) {
     enemy.takeHit()
     player.isAttacking = false
@@ -392,7 +415,7 @@ function animate() {
     })
   }
   // if player misses
-  if (player.isAttacking && player.framesCurrent === 4) {
+  if (player.isAttacking && player.framesCurrent === player.framesMax - 1) {
     player.isAttacking = false
   }
   // this is where our player gets hit
@@ -403,7 +426,7 @@ function animate() {
       rectangle2: player
     }) &&
     enemy.isAttacking &&
-    enemy.framesCurrent === 2
+    (enemy.framesCurrent === 2 || enemy.framesCurrent === enemy.framesMax - 2)
   ) {
     player.takeHit()
     enemy.isAttacking = false
@@ -412,14 +435,18 @@ function animate() {
     })
   }
   // if player misses
-  if (enemy.isAttacking && enemy.framesCurrent === 2) {
+  if (enemy.isAttacking && enemy.framesCurrent === enemy.framesMax - 1) {
     enemy.isAttacking = false
   }
   // end round based on health
   if (!roundEnded && (enemy.health <= 0 || player.health <= 0)) {
-    determineWinner({ player, enemy, timerId })
+    determineWinner({ player, enemy })
   }
 }
+// Movement speeds (must be declared before starting the game loop)
+const MOVE_SPEED = 5
+const ATTACK_MOVE_SPEED = 2 // slower speed while attacking
+
 animate()
 window.addEventListener('keydown', (event) => {
   // Allow restarting match if it's over
@@ -439,10 +466,15 @@ window.addEventListener('keydown', (event) => {
         player.lastKey = 'a'
         break
       case 'w':
-        player.velocity.y = -20
+        // only allow jump if on ground
+        if (player.isOnGround && player.isOnGround()) player.velocity.y = -20
         break
-      case ' ':
+      case 's':
         player.attack()
+        break
+      case 'e':
+      case 'E':
+        player.attack2()
         break
     }
   }
@@ -457,10 +489,15 @@ window.addEventListener('keydown', (event) => {
         enemy.lastKey = 'ArrowLeft'
         break
       case 'ArrowUp':
-        enemy.velocity.y = -20
+        // only allow enemy jump if on ground
+        if (enemy.isOnGround && enemy.isOnGround()) enemy.velocity.y = -20
         break
       case 'ArrowDown':
         enemy.attack()
+        break
+      case 'k':
+      case 'K':
+        enemy.attack2()
         break
     }
   }
@@ -502,7 +539,7 @@ document.getElementById('moveRight').addEventListener('touchend', () => {
 })
 
 document.getElementById('jump').addEventListener('touchstart', () => {
-  if (!player.dead) player.velocity.y = -20
+  if (!player.dead && player.isOnGround && player.isOnGround()) player.velocity.y = -20
 })
 
 document.getElementById('attack').addEventListener('touchstart', () => {
@@ -516,3 +553,5 @@ if (restartBtnEl) {
     restartMatch()
   })
 }
+
+// (movement speed constants are declared earlier)
