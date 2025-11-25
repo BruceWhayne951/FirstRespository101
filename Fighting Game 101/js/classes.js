@@ -62,6 +62,7 @@ class Fighter extends Sprite {
     offset = { x: 0, y: 0 },
     sprites,
     attackBox = { offset: {}, width: undefined, height: undefined }
+    , maxHealth = 100
   }) {
     super({
       position,
@@ -86,7 +87,8 @@ class Fighter extends Sprite {
     }
     this.color = color
     this.isAttacking
-    this.health = 100
+    this.maxHealth = maxHealth
+    this.health = this.maxHealth
     this.framesCurrent = 0
     this.framesElapsed = 0
     this.framesHold = 5
@@ -172,7 +174,9 @@ class Fighter extends Sprite {
   takeHit() {
     // Prevent taking additional damage after health reaches 0
     if (this.health > 0) {
-      this.health -= 20
+      // Damage scales to 10% of max health; allow decimals so we can show precision
+      const damage = Math.max(0.01, this.maxHealth * 0.1)
+      this.health -= damage
 
       if (this.health <= 0) {
         this.health = 0

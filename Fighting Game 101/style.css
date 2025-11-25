@@ -84,7 +84,7 @@ html, body {
   text-align: center;
   position: relative;
   border-radius: 4px;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P';
   letter-spacing: 2px;
 }
 
@@ -154,6 +154,37 @@ canvas {
   background-image: repeating-linear-gradient(90deg, #ff4b4b 0 12px, #ff8a8a 12px 24px);
 }
 
+.health-number {
+  position: absolute;
+  left: 8px; /* left aligned */
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 0 2px 0 #000;
+  pointer-events: none;
+  z-index: 4;
+  display: inline-block; /* allow animations */
+}
+
+/* Small HUD readouts */
+.health-hud-small {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 20px;
+}
+.health-small {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: #fff;
+  background: rgba(0,0,0,0.6);
+  border: 2px solid rgba(255,255,255,0.15);
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
 .mobile-controls {
   position: fixed;
   bottom: 20px;
@@ -204,7 +235,7 @@ canvas {
   font-family: 'Press Start 2P', cursive;
   font-size: 12px;
   color: #ffffff;
-  background: linear-gradient(180deg, #ffcc00 0%, #ff9f00 100%);
+  background:#ff000d;
   padding: 12px 18px;
   border: 6px solid #111;
   text-align: center;
@@ -222,3 +253,63 @@ canvas {
 #restartButton {
   text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
 }
+
+/* Pulse + pop animations for restart button */
+@keyframes restartPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes restartPulse {
+  0% { transform: scale(1); box-shadow: 0 6px 0 0 #222; }
+  50% { transform: scale(1.05); box-shadow: 0 8px 0 0 #222; }
+  100% { transform: scale(1); box-shadow: 0 6px 0 0 #222; }
+}
+.restart-anim {
+  animation: restartPop 0.3s ease-out 1, restartPulse 1.2s ease-in-out 0.3s infinite;
+}
+#restartButton:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+/* Quick 8-bit press/shake animation for the restart button */
+@keyframes restartPressShake {
+  0% { transform: translateY(0) scale(1); }
+  30% { transform: translate(-3px, 3px) scale(0.98); }
+  60% { transform: translate(3px, -2px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); }
+}
+.restart-pressed {
+  animation: restartPressShake 110ms steps(2, end) 1;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.8));
+  /* make it look pressed with a pixel overlay */
+  background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.06) 0 6px, rgba(255,255,255,0.03) 6px 12px), var(--restart-bg, linear-gradient(180deg, #ffcc00 0%, #ff9f00 100%));
+  background-blend-mode: overlay;
+  filter: brightness(0.9) drop-shadow(0 2px 0 rgba(0,0,0,0.8));
+}
+
+/* Hue rotate animation (broad color shift) */
+@keyframes restartHueShift {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Color variants for the restart button - can be cycled by JS */
+.restart-color-gold {
+  background: linear-gradient(180deg, #ffcc00 0%, #ff9f00 100%);
+  border-color: #111;
+}
+.restart-color-red {
+  background: linear-gradient(180deg, #ff5b5b 0%, #ff1f1f 100%);
+  border-color: #2a0a0a;
+}
+.restart-color-green {
+  background: linear-gradient(180deg, #5bff8a 0%, #00d39b 100%);
+  border-color: #083019;
+}
+.restart-color-blue {
+  background: linear-gradient(180deg, #5b6ef0 0%, #3b59ff 100%);
+  border-color: #09184b;
+}
+
+/* No confetti styles: particle effects disabled */

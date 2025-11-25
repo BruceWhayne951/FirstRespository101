@@ -26,10 +26,17 @@
     <div class="hud">
       <div class="health-bar" id="playerHealthContainer">
         <div id="playerHealth"></div>
+        <span class="health-number" id="playerHealthNumber">250 / 250</span>
       </div>
       <div class="health-bar" id="enemyHealthContainer">
         <div id="enemyHealth"></div>
+        <span class="health-number" id="enemyHealthNumber">250 / 250</span>
       </div>
+    </div>
+    <!-- Small numeric HUD showing quick readout -->
+    <div class="health-hud-small">
+      <div id="playerHealthSmall" class="health-small">250</div>
+      <div id="enemyHealthSmall" class="health-small">250</div>
     </div>
     <!-- Score Display moved here so it appears below the HUD -->
     <div class="score-container">
@@ -48,7 +55,7 @@
   
     <div id="displayText" style="display: none;"></div>
     <div id="roundControls" style="display: none; margin-top: 8px; text-align:center;">
-      <button id="restartButton" style="display:none;">Restart Match</button>
+      <button id="restartButton" style="display:none;">Recover?</button>
     </div>
 
   <div class="mobile-controls">

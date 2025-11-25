@@ -111,7 +111,8 @@ const player = new Fighter({
     },
     width: 160,
     height: 50
-  }
+  },
+  maxHealth: 250
 })
 const enemy = new Fighter({
   position: {
@@ -133,7 +134,7 @@ const enemy = new Fighter({
     idle: {
       imageSrc: './img/kenji/Idle.png',
       framesMax: 4,
-      framesHold: 12 // Slower idle
+      framesHold: 13 // Slower idle
     },
     run: {
       imageSrc: './img/kenji/Run.png',
@@ -153,7 +154,7 @@ const enemy = new Fighter({
     attack1: {
       imageSrc: './img/kenji/Attack1.png',
       framesMax: 4,
-      framesHold: 10 // Slower so opponent can dodge
+      framesHold: 4 // Slower so opponent can dodge
     },
     attack2: {
       imageSrc: './img/kenji/Attack2.png',
@@ -178,7 +179,8 @@ const enemy = new Fighter({
     },
     width: 170,
     height: 50
-  }
+  },
+  maxHealth: 250
 })
 const keys = {
   a: {
@@ -205,8 +207,8 @@ let matchEnded = false // Track if the match is over
 // Function to reset for a new round
 function resetRound() {
   roundEnded = false // Reset the round-ended flag
-  player.health = 100
-  enemy.health = 100
+  player.health = player.maxHealth
+  enemy.health = enemy.maxHealth
   player.position = { x: 100, y: 0 }
   enemy.position = { x: 824, y: 0 }
   player.velocity = { x: 0, y: 0 }
@@ -237,6 +239,24 @@ function resetRound() {
   }
   gsap.to('#playerHealth', { width: '100%' })
   gsap.to('#enemyHealth', { width: '100%' })
+  // Update numeric HUD — show `current / max` on the bar and small HUD number
+  const playerHealthNum = document.getElementById('playerHealthNumber')
+  const enemyHealthNum = document.getElementById('enemyHealthNumber')
+  const playerHealthSmall = document.getElementById('playerHealthSmall')
+  const enemyHealthSmall = document.getElementById('enemyHealthSmall')
+  if (playerHealthNum) playerHealthNum.innerText = `${formatHealthDisplay(player.health)} / ${formatHealthDisplay(player.maxHealth)}`
+  if (enemyHealthNum) enemyHealthNum.innerText = `${formatHealthDisplay(enemy.health)} / ${formatHealthDisplay(enemy.maxHealth)}`
+  if (playerHealthSmall) playerHealthSmall.innerText = `${formatHealthDisplay(player.health)}`
+  if (enemyHealthSmall) enemyHealthSmall.innerText = `${formatHealthDisplay(enemy.health)}`
+  // animate reset so it doesn't look static
+  animateHealthChange(playerHealthNum, playerHealthSmall)
+  animateHealthChange(enemyHealthNum, enemyHealthSmall)
+}
+
+// Format health for display: remove `.0` when the value is an integer, otherwise show 1 decimal
+function formatHealthDisplay(value) {
+  if (Math.abs(value - Math.round(value)) < 1e-6) return String(Math.round(value))
+  return value.toFixed(1)
 }
 
 // Function to restart the match
@@ -249,7 +269,13 @@ function restartMatch() {
   // Hide restart button and controls if visible
   const restartBtn = document.getElementById('restartButton')
   const roundControls = document.getElementById('roundControls')
-  if (restartBtn) restartBtn.style.display = 'none'
+  if (restartBtn) {
+    restartBtn.style.display = 'none'
+    restartBtn.classList.remove('restart-anim')
+    // remove color classes if present
+    restartBtn.classList.remove('restart-color-gold', 'restart-color-red', 'restart-color-green', 'restart-color-blue')
+  }
+  // removed particle effects: no clearConfetti call
   if (roundControls) roundControls.style.display = 'none'
   document.querySelector('#displayText').style.display = 'none'
   resetRound()
@@ -336,7 +362,21 @@ function determineWinner({ player, enemy }) {
     const restartBtn = document.getElementById('restartButton')
     const roundControls = document.getElementById('roundControls')
     if (roundControls) roundControls.style.display = 'block'
-    if (restartBtn) restartBtn.style.display = 'inline-block'
+    if (restartBtn) {
+      restartBtn.style.display = 'inline-block'
+      restartBtn.classList.add('restart-anim')
+      // Cycle color classes (gold -> red -> green -> blue)
+      const colorClasses = ['restart-color-gold', 'restart-color-red', 'restart-color-green', 'restart-color-blue']
+      if (typeof window.restartColorIndex === 'undefined') window.restartColorIndex = 0
+      // Remove any existing color classes
+      colorClasses.forEach((cc) => restartBtn.classList.remove(cc))
+      const pick = colorClasses[window.restartColorIndex % colorClasses.length]
+      restartBtn.classList.add(pick)
+      window.restartColorIndex++
+      try {
+        if (typeof gsap !== 'undefined') gsap.fromTo(restartBtn, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: 'back.out(1.7)' })
+      } catch (e) {}
+    }
   } else {
     // Next round after a delay
     setTimeout(() => {
@@ -411,8 +451,13 @@ function animate() {
     enemy.takeHit()
     player.isAttacking = false
     gsap.to('#enemyHealth', {
-      width: enemy.health + '%'
+      width: ((enemy.health / enemy.maxHealth) * 100) + '%'
     })
+    const enemyHealthNumEl = document.getElementById('enemyHealthNumber')
+    const enemyHealthSmallEl = document.getElementById('enemyHealthSmall')
+    if (enemyHealthNumEl) enemyHealthNumEl.innerText = `${formatHealthDisplay(enemy.health)} / ${formatHealthDisplay(enemy.maxHealth)}`
+    if (enemyHealthSmallEl) enemyHealthSmallEl.innerText = formatHealthDisplay(enemy.health)
+    animateHealthChange(enemyHealthNumEl, enemyHealthSmallEl)
   }
   // if player misses
   if (player.isAttacking && player.framesCurrent === player.framesMax - 1) {
@@ -431,8 +476,13 @@ function animate() {
     player.takeHit()
     enemy.isAttacking = false
     gsap.to('#playerHealth', {
-      width: player.health + '%'
+      width: ((player.health / player.maxHealth) * 100) + '%'
     })
+    const playerHealthNumEl = document.getElementById('playerHealthNumber')
+    const playerHealthSmallEl = document.getElementById('playerHealthSmall')
+    if (playerHealthNumEl) playerHealthNumEl.innerText = `${formatHealthDisplay(player.health)} / ${formatHealthDisplay(player.maxHealth)}`
+    if (playerHealthSmallEl) playerHealthSmallEl.innerText = formatHealthDisplay(player.health)
+    animateHealthChange(playerHealthNumEl, playerHealthSmallEl)
   }
   // if player misses
   if (enemy.isAttacking && enemy.framesCurrent === enemy.framesMax - 1) {
@@ -448,6 +498,24 @@ const MOVE_SPEED = 5
 const ATTACK_MOVE_SPEED = 2 // slower speed while attacking
 
 animate()
+
+// Helper to animate health text changes
+function animateHealthChange(el, smallEl) {
+  try {
+    if (el) {
+      gsap.fromTo(el, { scale: 1.3 }, { scale: 1, duration: 0.12, ease: 'power1.out' })
+      gsap.fromTo(el, { color: '#fff' }, { color: '#ffef00', duration: 0.08, yoyo: true, repeat: 1 })
+    }
+    if (smallEl) {
+      gsap.fromTo(smallEl, { x: -6 }, { x: 0, duration: 0.12, ease: 'power1.out', yoyo: true, repeat: 1 })
+      gsap.fromTo(smallEl, { scale: 1.15 }, { scale: 1, duration: 0.12 })
+    }
+  } catch (e) {
+    // GSAP not present or minor failure, ignore
+  }
+}
+
+// No confetti functions - particle effects disabled
 window.addEventListener('keydown', (event) => {
   // Allow restarting match if it's over
   if (matchEnded && event.key === ' ') {
@@ -539,7 +607,7 @@ document.getElementById('moveRight').addEventListener('touchend', () => {
 })
 
 document.getElementById('jump').addEventListener('touchstart', () => {
-  if (!player.dead && player.isOnGround && player.isOnGround()) player.velocity.y = -20
+  if (!player.dead && player.isOnGround && player.isOnGround()) player.velocity.y = -15
 })
 
 document.getElementById('attack').addEventListener('touchstart', () => {
@@ -552,6 +620,71 @@ if (restartBtnEl) {
   restartBtnEl.addEventListener('click', () => {
     restartMatch()
   })
+  // Visual press animation for quick feedback (mousedown/touchstart)
+  restartBtnEl.addEventListener('mousedown', () => {
+    restartBtnEl.classList.add('restart-pressed')
+    setTimeout(() => restartBtnEl.classList.remove('restart-pressed'), 140)
+  })
+  restartBtnEl.addEventListener('touchstart', () => {
+    restartBtnEl.classList.add('restart-pressed')
+    setTimeout(() => restartBtnEl.classList.remove('restart-pressed'), 140)
+  }, { passive: true })
+  // Keyboard accessibility: space/enter
+  restartBtnEl.addEventListener('keydown', (ev) => {
+    if (ev.key === ' ' || ev.key === 'Enter') {
+      restartBtnEl.classList.add('restart-pressed')
+      setTimeout(() => restartBtnEl.classList.remove('restart-pressed'), 140)
+    }
+  })
+  // particle effects removed (no spawnConfetti)
 }
+
+// WebAudio SFX helper (global), supports 'restart','hit','heavy','death'
+function playSfx(kind = 'beep') {
+  try {
+    if (!window.__audioCtx) window.__audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    const ctx = window.__audioCtx
+    switch (kind) {
+      case 'restart': {
+        const o = ctx.createOscillator(); const g = ctx.createGain();
+        o.type = 'square'; o.frequency.value = 880; g.gain.value = 0.12; o.connect(g); g.connect(ctx.destination);
+        o.start(); g.gain.setValueAtTime(0.12, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08); o.stop(ctx.currentTime + 0.1);
+        break;
+      }
+      case 'hit': {
+        const o = ctx.createOscillator(); const g = ctx.createGain();
+        o.type = 'triangle'; o.frequency.value = 240; g.gain.value = 0.08; o.connect(g); g.connect(ctx.destination);
+        o.start(); g.gain.setValueAtTime(0.08, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06); o.stop(ctx.currentTime + 0.08);
+        break;
+      }
+      case 'heavy': {
+        const o = ctx.createOscillator(); const g = ctx.createGain();
+        o.type = 'sawtooth'; o.frequency.value = 180; g.gain.value = 0.12; o.connect(g); g.connect(ctx.destination);
+        o.start(); g.gain.setValueAtTime(0.12, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12); o.stop(ctx.currentTime + 0.14);
+        break;
+      }
+      case 'death': {
+        const o = ctx.createOscillator(); const g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = 400; g.gain.value = 0.14; o.connect(g); g.connect(ctx.destination);
+        o.start(); o.frequency.setValueAtTime(400, ctx.currentTime); o.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.6);
+        g.gain.setValueAtTime(0.14, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+        o.stop(ctx.currentTime + 0.65);
+        break;
+      }
+      default: {
+        const o = ctx.createOscillator(); const g = ctx.createGain();
+        o.type = 'square'; o.frequency.value = 880; g.gain.value = 0.08; o.connect(g); g.connect(ctx.destination);
+        o.start(); g.gain.setValueAtTime(0.08, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06); o.stop(ctx.currentTime + 0.08);
+      }
+    }
+  } catch (err) { /* ignore error */ }
+}
+// Play sound on mouse/touch/keyboard press (use playSfx to match the helper defined above)
+  if (restartBtnEl) {
+    restartBtnEl.addEventListener('mousedown', () => playSfx('restart'))
+    restartBtnEl.addEventListener('touchstart', () => playSfx('restart'), { passive: true })
+    restartBtnEl.addEventListener('keydown', (ev) => { if (ev.key === ' ' || ev.key === 'Enter') playSfx('restart') })
+  }
+  // No confetti: removed falling confetti spawn on press
 
 // (movement speed constants are declared earlier)
