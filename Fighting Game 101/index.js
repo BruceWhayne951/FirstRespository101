@@ -41,10 +41,10 @@ c.fillRect(0, 0, canvas.width, canvas.height)
 const gravity = 0.7
 const background = new Sprite({
   position: {
-    x: 0,
-    y: 0
+    x: -150,
+    y: -130,
   },
-  imageSrc: './img/background.png'
+  imageSrc: './img/aJ27IF.gif'
 })
 const player = new Fighter({
   position: {
@@ -57,7 +57,7 @@ const player = new Fighter({
   },
   offset: { // Drawing offset (remove the duplicate/conflicting one if present)
     x: 215,
-    y: 157
+    y: 100,
   },
   imageSrc: './img/samuraiMack/Idle.png',
   framesMax: 8,
@@ -71,7 +71,7 @@ const player = new Fighter({
     run: {
       imageSrc: './img/samuraiMack/Run.png',
       framesMax: 8,
-      framesHold: 6 // Medium-fast
+      framesHold: 6// Medium-fast
     },
     jump: {
       imageSrc: './img/samuraiMack/Jump.png',
@@ -125,7 +125,7 @@ const enemy = new Fighter({
   },
   offset: {
     x: 215,
-    y: 167
+    y: 120,
   },
   imageSrc: './img/kenji/Idle.png',
   framesMax: 4,

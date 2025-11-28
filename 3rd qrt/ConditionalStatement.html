@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional Statement</title>
+</head>
+<body>
+    <script>
+        let mana = 100;
+        let health = 250;
+        let skillLevel = 5;
+        if (skillLevel > 3) {
+            comcole.log("You have unlock a new skill!")
+        } else if (skillLevel == 4) {
+            console.log("You are halfway to unlocking ultimate skill!");
+        } else {
+            console.log("Keep practicing to unlock new skills.");
+        }
+        if (health == 0) {
+            console.log("You died.");
+        } else if (health < 200) {
+            console.log("You need to heal yourself.");
+        }
+        if (mana > 50) {
+            console.log("You have enough mana to cast the spell.");
+        } else if (mana == 50) {
+            console.log("You do not have enough mana to cast the spell.");
+        }
+    </script>
+</body>
+</html>

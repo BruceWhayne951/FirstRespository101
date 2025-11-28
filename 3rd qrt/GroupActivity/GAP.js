@@ -1,0 +1,1 @@
+window.alert("Hello from GAP.js in 3rd qrt/GroupActivity!");
